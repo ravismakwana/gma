@@ -79,6 +79,7 @@ remove_filter( 'the_excerpt', 'wpautop' );
 add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_title', 7 );
 add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_rating', 8 );
 add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_price', 9 );
+add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 14 );
 
 add_filter( 'woocommerce_product_get_rating_html', 'custom_add_star_rating_class', 10, 3 );
 function custom_add_star_rating_class( $html, $rating, $count ) {
@@ -88,7 +89,7 @@ function custom_add_star_rating_class( $html, $rating, $count ) {
 		if(is_single()) {
 			$html = str_replace( 'star-rating', 'star-rating', $html );
         } else {
-			$html = str_replace( 'star-rating', 'star-rating mx-auto my-3 d-block', $html );
+			$html = str_replace( 'star-rating', 'star-rating mx-auto d-block', $html );
         }
 
 	}
@@ -98,7 +99,7 @@ function custom_add_star_rating_class( $html, $rating, $count ) {
         if(is_single()) {
 	        $html  = '<div class="star-rating" role="img" aria-label="' . esc_attr( $label ) . '">' . wc_get_star_rating_html( 0, 0 ) . '</div>';
         } else {
-	        $html  = '<div class="star-rating mx-auto my-3 d-block" role="img" aria-label="' . esc_attr( $label ) . '">' . wc_get_star_rating_html( 0, 0 ) . '</div>';
+	        $html  = '<div class="star-rating mx-auto d-block" role="img" aria-label="' . esc_attr( $label ) . '">' . wc_get_star_rating_html( 0, 0 ) . '</div>';
         }
 
 	}
@@ -179,7 +180,7 @@ if(!function_exists('genericmedsaustralia_trust_pilot_section')) {
         <div class="clearfix"></div>
         <div class="trust-pilot-section trust-pilot-row row">
 			<div class="trust-pilot-heading">
-                <h2>What Our Customer Says</h2>
+                <h3>What Our Customer Says</h3>
             </div>
             <div class="signle-post-testimonial left">
 			    <?php echo do_shortcode('[TRUST_PILOT_AVG]'); ?>
@@ -198,7 +199,7 @@ if(!function_exists('genericmedsaustralia_trust_pilot_section_shortcode')) {
 			<div class="clearfix"></div>
 			<div class="trust-pilot-section trust-pilot-row row">
 		<div class="trust-pilot-heading">
-							<h2>What Our Customer Says</h2>
+							<h3>What Our Customer Says</h3>
 					</div>
 					<div class="signle-post-testimonial left">
 				<?php echo do_shortcode('[TRUST_PILOT_AVG]'); ?>

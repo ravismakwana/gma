@@ -455,7 +455,7 @@ if (!function_exists('_trust_pilot_avg_rating_box')) {
             }
             ?>
             <div class="trust-reviews-box">
-                <a href="https://www.genericmedsaustralia.com/service-reviews/"
+                <a href="/service-reviews/"
                    target="_blank"><span class="h3"><?php echo $trustTex; ?></span><div class="trust-img">
                              <?php $args = array(
                                     'rating' => $avg,

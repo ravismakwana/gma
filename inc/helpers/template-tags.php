@@ -733,3 +733,15 @@ if( ! function_exists('extractAndCreateWhatsAppLink')) {
 	}
 }
 
+function get_single_product_category_by_id($product_id) {
+	// Get the terms (categories) for the product
+	$terms = wp_get_post_terms($product_id, 'product_cat');
+
+	// Check if there are any terms and return the first one
+	if (!empty($terms) && !is_wp_error($terms)) {
+			return $terms[0]; // Return the first category found
+	}
+
+	// Return false if no terms found
+	return false;
+}
