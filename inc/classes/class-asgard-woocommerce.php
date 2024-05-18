@@ -323,13 +323,14 @@ class Asgard_Woocommerce {
 	public function asgard_custom_render_product_block( $html, $data, $post ) {
 
 		return '<li class="wc-block-grid__product">
-                <div class="border border-primary-subtle rounded-4 p-3">
+                <div class="p-3">
 				<a href="' . $data->permalink . '" class="wc-block-grid__product-link text-decoration-none">
 					' . $data->image . '
 					<span class="fs-14 text-decoration-none text-black">' . $data->title . '</span>
 				</a>
+                ' . $data->rating . '
 				' . $data->price . '
-				<a href="' . $data->permalink . '" class="fs-14 btn btn-primary rounded-pill mb-3" aria-label="view detail button">View detail</a>
+				<a href="' . $data->permalink . '" class="fs-14 btn btn-primary rounded-pill mb-3 d-none" aria-label="view detail button">View detail</a>
 				</div>
 			</li>';
 	}

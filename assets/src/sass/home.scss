@@ -1,4 +1,293 @@
 @import "essentials";
 /* Homepage style start */
+.fs-34 {
+  font-size: 2.267rem;
+  line-height: 1.4em;
+  margin-bottom: .7em;
+}
+.fs-30 {
+  font-size: 2rem;
+  line-height: 1.4em;
+  margin-bottom: .7em;
+}
+.fs-18 {
+  font-size: 1.133rem;
+  line-height: 1.6;
+}
+.body-text {
+  color: #415161;
+}
+.heading-border {
+  height: 3px !important;
+  opacity: 1;
+  width: 70px !important;
+  &::before {
+    display: none !important;
+  }
+}
+.front-page {
+  .hero-row {
+    .front-hero-banner {
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
 
+/* Homepage Media style */
+@media screen and (max-width: 767px) {
+  .fs-34 {
+    font-size: 25px;
+  }
+  .fs-30 {
+    font-size: 22px;
+  }
+}
+/* Homepage Media style end */
 /* Homepage style end */
+
+
+
+$color_1: #333;
+$color_2: #000;
+$color_3: #ffc60a;
+$color_4: #ffb900;
+$font-family_1: dashicons;
+$font-family_2: unset;
+$background-color_1: #fff;
+$bodyText: #415161;
+
+/* Site review slider css */
+
+/* Site review slider css END */
+.single-product {
+	.trust-pilot-section {
+		margin: 20px 0;
+	}
+}
+.trust-pilot-section {
+	margin-right: 0px !important;
+	margin-left: 0px !important;
+	border: 2px solid #48b9b7;
+	border-radius: 25px;
+	padding-top: 40px;
+	display: inline-block;
+	width: 100%;
+	background-color: $background-color_1;
+}
+.trust-pilot-heading {
+	>h2 {
+		color: $bodyText;
+		font-size: 26px;
+		font-weight: 600;
+		line-height: normal;
+		text-align: center;
+		padding: 0px 10px 15px;
+		position: relative;
+		display: flex;
+		justify-content: center;
+		margin: 0;
+		top: -15px;
+	}
+}
+.trust-reviews-box {
+	text-align: center;
+	margin-bottom: 30px;
+	.h3 {
+		color: $color_2;
+		font-size: 24px;
+		margin: 0 0 12px;
+		line-height: 24px;
+	}
+	.star-rating {
+		.star {
+			font-size: 30px;
+			width: 30px;
+			height: 30px;
+		}
+	}
+}
+.single-product.woocommerce {
+	.star-rating {
+		span {
+			color: $color_3;
+		}
+		&:before {
+			font-size: 0 !important;
+		}
+		float: unset !important;
+		overflow: unset !important;
+		position: relative !important;
+		height: unset !important;
+		line-height: unset !important;
+		font-size: unset !important;
+		width: unset !important;
+		font-family: $font-family_2 !important;
+	}
+	.entry-summary {
+		.star-rating {
+			display: none;
+		}
+	}
+}
+.woocommerce-page {
+	.star-rating {
+		span {
+			color: $color_3;
+		}
+	}
+}
+.star-rating {
+	.star {
+		color: $color_4 !important;
+		display: inline-block;
+		font-family: $font-family_1;
+		font-size: 20px;
+		font-style: normal;
+		font-weight: 400;
+		height: 20px;
+		line-height: 1;
+		text-align: center;
+		text-decoration: inherit;
+		vertical-align: top;
+		width: 20px;
+	}
+	.star-full {
+		&:before {
+			content: "\f155";
+		}
+	}
+	.star-half {
+		&:before {
+			content: "\f459";
+		}
+	}
+}
+.review_slider.owl-carousel {
+	opacity: 1;
+	display: block;
+	.owl-item {
+		display: block;
+		visibility: visible !important;
+	}
+}
+ul.review_slider {
+	padding: 0 30px;
+	margin: 0 !important;
+}
+.review_slider {
+	opacity: 0;
+	transition: opacity 1s;
+	display: none;
+	.owl-item {
+		li.review-item {
+			list-style-type: none;
+			padding: 0px 10px !important;
+		}
+	}
+	li {
+		max-width: 270px;
+		width: 100%;
+		margin: 0 10px !important;
+		padding: 0 !important;
+	}
+	.owl-buttons {
+		.owl-prev {
+			a {
+				&:before {
+					content: "";
+					position: absolute;
+					transform: rotate(180deg);
+					top: 30%;
+					left: 0;
+					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23dddddd' viewBox='0 0 320 512'%3E%3C!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --%3E%3Cpath d='M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z'/%3E%3C/svg%3E");
+					background-repeat: no-repeat;
+					height: 20px;
+					width: 20px;
+				}
+			}
+		}
+		.owl-next {
+			a {
+				&:before {
+					content: "";
+					position: absolute;
+					top: 30%;
+					right: 0;
+					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23dddddd' viewBox='0 0 320 512'%3E%3C!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --%3E%3Cpath d='M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z'/%3E%3C/svg%3E");
+					background-repeat: no-repeat;
+					height: 20px;
+					width: 20px;
+				}
+			}
+		}
+	}
+	.glsr-review-content {
+		.glsr-tag-value {
+			overflow: hidden;
+			display: -webkit-box;
+			-webkit-line-clamp: 1;
+			-webkit-box-orient: vertical;
+		}
+	}
+}
+.review-item.carousel-cell {
+	.glsr-review-date {
+		display: inline-block;
+		float: right;
+	}
+	.glsr-review-author {
+		display: none;
+	}
+}
+.owl-theme {
+	.owl-controls {
+		.owl-buttons {
+			div {
+				background: none !important;
+			}
+		}
+	}
+}
+.signle-post-testimonial.left {
+	float: left;
+	width: 25%;
+	padding: 0 15px;
+}
+.signle-post-testimonial.right {
+	float: left;
+	width: 75%;
+	padding-right: 15px;
+}
+#kvhngbfog {
+	margin-top: 80px;
+}
+.max-twelve {
+	.elementor-element {
+		max-width: 1200px !important;
+		width: 100%;
+		margin: 0 auto;
+	}
+}
+@media (max-width:1200px) {
+	.signle-post-testimonial.left {
+		width: 100%;
+		padding: 0 15px;
+	}
+	.signle-post-testimonial.right {
+		width: 100%;
+		padding: 0 15px;
+	}
+	.review_slider {
+		li {
+			margin: auto;
+		}
+	}
+	.summary-wrap-main {
+		>.glsr-summary {
+			justify-content: center;
+			margin: 0 auto;
+		}
+	}
+}

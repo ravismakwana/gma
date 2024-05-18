@@ -171,4 +171,47 @@ function asgard_wc_display_item_meta( $item, $args = array() ) {
 		return $html;
 	}
 }
-
+/* Trust pilot Reviews */
+require get_stylesheet_directory() . '/template-parts/trust-pilot.php';
+if(!function_exists('genericmedsaustralia_trust_pilot_section')) {
+    function genericmedsaustralia_trust_pilot_section(){
+        ?>
+        <div class="clearfix"></div>
+        <div class="trust-pilot-section trust-pilot-row row">
+			<div class="trust-pilot-heading">
+                <h2>What Our Customer Says</h2>
+            </div>
+            <div class="signle-post-testimonial left">
+			    <?php echo do_shortcode('[TRUST_PILOT_AVG]'); ?>
+            </div>
+            <div class="signle-post-testimonial right">
+			    <?php echo do_shortcode('[TRUSTPILOT_REVIEWS]'); ?>
+            </div>
+        </div>
+        <?php
+    }
+}
+if(!function_exists('genericmedsaustralia_trust_pilot_section_shortcode')) {
+	function genericmedsaustralia_trust_pilot_section_shortcode(){
+		ob_start();
+			?>
+			<div class="clearfix"></div>
+			<div class="trust-pilot-section trust-pilot-row row">
+		<div class="trust-pilot-heading">
+							<h2>What Our Customer Says</h2>
+					</div>
+					<div class="signle-post-testimonial left">
+				<?php echo do_shortcode('[TRUST_PILOT_AVG]'); ?>
+					</div>
+					<div class="signle-post-testimonial right">
+				<?php echo do_shortcode('[TRUSTPILOT_REVIEWS]'); ?>
+					</div>
+			</div>
+			<?php
+			$data = ob_get_clean();
+			wp_reset_postdata();
+			return $data;
+	}
+}
+// add_action('woocommerce_after_single_product_summary', 'genericmedsaustralia_trust_pilot_section', 9);
+add_shortcode('SITE_REVIEW', 'genericmedsaustralia_trust_pilot_section_shortcode');
