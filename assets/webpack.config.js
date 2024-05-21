@@ -20,6 +20,7 @@ const entry = {
     blocks: JS_DIR + '/blocks.js',
     author: JS_DIR + '/author.js',
     home: JS_DIR + '/home.js',
+    review: JS_DIR + '/review.js',
     product: JS_DIR + '/product.js',
 };
 const output = {

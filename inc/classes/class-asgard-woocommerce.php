@@ -44,7 +44,7 @@ class Asgard_Woocommerce {
 		], 10, 2 );
 
 
-		add_filter( 'woocommerce_variable_price_html', [ $this, 'asgard_custom_variation_price' ], 10, 2 );
+		// add_filter( 'woocommerce_variable_price_html', [ $this, 'asgard_custom_variation_price' ], 10, 2 );
 		add_action( 'woocommerce_single_product_summary', [ $this, 'woocommerce_add_attributes' ], 21 );
 		add_action( 'woocommerce_after_single_product_summary', [ $this, 'display_variation_in_table_format' ], 5 );
 		add_action( 'woocommerce_share', [ $this, 'product_share_single_product_page' ], 10 );
@@ -206,14 +206,22 @@ class Asgard_Woocommerce {
 	}
 
 	public function asgard_custom_render_product_block( $html, $data, $post ) {
+        // echo '<pre>';
+        // print_r($post->id); 
+        $product_id = $post->id; // Replace with your product ID
+        $product_category = get_single_product_category_by_id($product_id);
+        $product_categories_name = $product_category->name;
+    
 		return '<li class="wc-block-grid__product">
-                <div class="border border-primary-subtle rounded-4 p-3">
+                <div class="p-3">
 				<a href="' . $data->permalink . '" class="wc-block-grid__product-link text-decoration-none">
 					' . $data->image . '
-					<span class="fs-14 text-decoration-none text-black">' . $data->title . '</span>
+                    <div class="product-cat-handpick mb-2 body-text text-uppercase opacity-50">'. $product_categories_name .'</div>
+					<span class="fs-6 text-decoration-none body-text">' . $data->title . '</span>
 				</a>
-				' . $data->price . '
-				<a href="' . $data->permalink . '" class="fs-14 btn btn-primary rounded-pill mb-3" aria-label="view detail button">View detail</a>
+                ' . $data->rating . '
+				<div class="product-price fw-bold fs-14">' . $data->price . '</div>
+				<a href="' . $data->permalink . '" class="fs-14 btn btn-primary rounded-pill mb-3 d-none" aria-label="view detail button">View detail</a>
 				</div>
 			</li>';
 	}

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Front Page Template
+ * Template Name: Full Width Page
  *
  * @package Asgard
  */
@@ -9,7 +9,7 @@
 get_header();
 
 ?>
-<div id="primary" class="front-page">
+<div id="primary" class="main">
 
 
 		<?php
@@ -18,6 +18,7 @@ get_header();
 			while ( have_posts() ) : the_post();
 //				get_template_part( 'template-parts/content', 'page' );
             the_content();
+						
 			endwhile;
 
 		} else {
