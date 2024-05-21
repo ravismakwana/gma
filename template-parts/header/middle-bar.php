@@ -28,7 +28,10 @@ $header_menu_id = $menu_class->get_menu_id('asgard-main-menu');
             </div>
             <div class="col-xl-2 col-lg-3 col-md-3 col-sm-6 col-6 card_wishlist_area">
 	            <?php if (class_exists('WooCommerce')) { ?>
-                <div class="top-cart-contain position-relative">
+                <div class="top-cart-contain position-relative d-flex justify-content-end align-items-center">
+                    <div class="header-whatsapp me-2 me-md-4">
+                        <a href="https://api.whatsapp.com/send?phone=61731032369" target="_blank"><svg class="" width="32px" height="32px" fill="#067e69"><use href="#icon-whatsapp"></use></svg></a>
+                    </div>
 		            <?php asgard_mini_cart(); ?>
                 </div>
                 <?php } ?>

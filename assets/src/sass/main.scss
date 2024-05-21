@@ -421,6 +421,9 @@ footer {
   display: -webkit-box;
   -webkit-box-orient: vertical;
 }
+body.admin-bar .offcanvas {
+  padding-top: 32px;
+}
 @media only screen and (min-width: 991px) {
   .border-lg-end {
     border-right: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important;

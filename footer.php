@@ -58,10 +58,7 @@ get_template_part( 'template-parts/content', 'svgs' );
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-		<?php
-		echo asgard_canvas_menu();
-		?>
-
+		<?php echo asgard_canvas_menu(); ?>
     </div>
 </div>
 <?php echo asgard_canvas_right_cart(); ?>
