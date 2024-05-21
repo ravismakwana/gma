@@ -95,6 +95,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 /***/ (function() {
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
@@ -104,47 +105,22 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   var AsgardWoocommerce = /*#__PURE__*/function () {
     function AsgardWoocommerce() {
       _classCallCheck(this, AsgardWoocommerce);
-      this.slideEffectAjax();
       this.addToCartAjax();
       this.dropZoneCheckout();
     }
     return _createClass(AsgardWoocommerce, [{
-      key: "slideEffectAjax",
-      value: function slideEffectAjax() {
-        jQuery('.top-cart-contain').on('mouseenter', function () {
-          jQuery(this).find('.top-cart-content').stop(true, true).show();
-        });
-        jQuery('.top-cart-contain').on('mouseleave', function () {
-          jQuery(this).find('.top-cart-content').stop(true, true).hide();
-        });
-      }
-    }, {
       key: "addToCartAjax",
       value: function addToCartAjax() {
         if (jQuery('.btn-add-to-cart-ajax').length) {
           $(document).on('click', '.btn-add-to-cart-ajax', function () {
-            var data_variation,
-              product_id,
-              variation_id,
-              qty,
-              variation_key,
-              variation_val,
-              var_data = '';
-            var var_data = {};
-            product_id = jQuery(this).attr('data-product_id');
-            variation_id = jQuery(this).attr('data-variation_id');
-            qty = jQuery(this).attr('data-quantity');
-            //console.log("Product ID = "+product_id+ "Variation ID = "+ variation_id + "Quantity = "+ qty);
-            data_variation = jQuery(this).attr('data-variation');
-            var_data = data_variation.split('=');
-            variation_key = var_data['0'];
-            variation_val = var_data['1'];
-            var_data[variation_key] = variation_val;
-            //jQuery(this).prop("disabled", true);
             var btn = jQuery(this);
-            jQuery(this).html('<div class="spinner-border spinner-border-sm text-danger" role="status"> <span class="visually-hidden">Loading...</span> </div>');
+            var product_id = btn.attr('data-product_id');
+            var variation_id = btn.attr('data-variation_id');
+            var qty = btn.attr('data-quantity');
+            var data_variation = btn.attr('data-variation').split('=');
+            var var_data = _defineProperty({}, data_variation[0], data_variation[1]);
+            btn.html('<div class="spinner-border spinner-border-sm text-danger" role="status"> <span class="visually-hidden">Loading...</span> </div>');
             btn.parent('.footable-last-visible').find('.checkout_button').remove();
-            console.log('Product ID = ' + product_id + ' Variation ID = ' + variation_id + ' Quantity = ' + qty + ' variation_key=' + variation_key + ' variation_val=' + variation_val);
             jQuery.ajax({
               url: ajax_object.ajax_url,
               data: {
@@ -158,14 +134,19 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
               success: function success(data) {
                 btn.html('<svg width="25" height="25" fill="var(--bs-danger)"><use href="#icon-cart"></use></svg>');
                 setTimeout(function () {
-                  btn.html('<svg class="d-block mx-auto m-0" width="25" height="25" fill="var(--bs-danger)"> <use href="#icon-cart"></use> </svg>');
+                  btn.html('<svg class="d-block mx-auto m-0" width="25" height="25" fill="var(--bs-danger)"><use href="#icon-cart"></use></svg>');
                 }, 1000);
-                console.log(ajax_object.checkout_url);
-                btn.parent('.footable-last-visible').append('<a href="' + ajax_object.checkout_url + '" title="Checkout" alt="Checkout" class="btn checkout_button p-0 ms-2" ><svg width="25" height="25" fill="var(--bs-primary)"><use href="#icon-circle-check"></use></svg></a>');
+                btn.parent('.footable-last-visible').append("<a href=\"".concat(ajax_object.checkout_url, "\" title=\"Checkout\" alt=\"Checkout\" class=\"btn checkout_button p-0 ms-2\">\n\t\t\t\t\t\t\t\t\t<svg width=\"25\" height=\"25\" fill=\"var(--bs-primary)\"><use href=\"#icon-circle-check\"></use></svg>\n\t\t\t\t\t\t\t\t</a>"));
                 jQuery('.mini-cart').replaceWith(data.fragments['.mini-cart']);
+                jQuery('div.offcanvas-body-inner').replaceWith(data.fragments['div.offcanvas-body-inner']);
+                jQuery('div.right_cart-subtotal-right').replaceWith(data.fragments['div.right_cart-subtotal-right']);
                 jQuery('div.button-group-single-product').replaceWith(data.fragments['div.button-group-single-product']);
                 jQuery('div.widget_shopping_cart_content').replaceWith(data.fragments['div.widget_shopping_cart_content']);
-                jQuery('.top-cart-content').css('display', 'block');
+
+                // Trigger the offcanvas to open
+                var offcanvasElement = document.getElementById('offcanvasRight');
+                var bsOffcanvas = new bootstrap.Offcanvas(offcanvasElement);
+                bsOffcanvas.show();
               }
             });
           });
@@ -205,6 +186,18 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
   }();
   new AsgardWoocommerce();
 })(jQuery);
+
+/***/ }),
+
+/***/ "./src/img/secure-with-macfee.webp":
+/*!*****************************************!*\
+  !*** ./src/img/secure-with-macfee.webp ***!
+  \*****************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("../../src/img/secure-with-macfee.webp");
 
 /***/ }),
 
@@ -302,6 +295,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _woo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./woo */ "./src/js/woo/index.js");
 /* harmony import */ var _woo__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_woo__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _sass_main_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../sass/main.scss */ "./src/sass/main.scss");
+/* harmony import */ var _img_secure_with_macfee_webp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../img/secure-with-macfee.webp */ "./src/img/secure-with-macfee.webp");
 // import './clock';
 // import './carousel';
 
@@ -318,7 +312,7 @@ __webpack_require__.r(__webpack_exports__);
 // import '../img/patterns/c3-150x150.jpeg';
 // import '../img/email.webp';
 // import '../img/payment.webp';
-// import '../img/secure-with-macfee.webp';
+
 }();
 /******/ })()
 ;

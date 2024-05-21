@@ -61,6 +61,9 @@ body {
   font-size: 15px;
   font-family: "Poppins";
 }
+.fw-200 {
+  font-weight: 200;
+}
 .fs-12 {
   font-size: 12px;
 }
@@ -332,6 +335,7 @@ footer {
           text-decoration: none;
           display: inline-block;
           font-size: 15px;
+          font-weight: 200;
           &:hover {
             color: $secondary;
           }
@@ -416,6 +420,9 @@ footer {
   -webkit-line-clamp: 2;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+}
+body.admin-bar .offcanvas {
+  padding-top: 32px;
 }
 @media only screen and (min-width: 991px) {
   .border-lg-end {

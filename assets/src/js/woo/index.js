@@ -1,60 +1,25 @@
 (function ($) {
 	class AsgardWoocommerce {
 		constructor() {
-			this.slideEffectAjax();
 			this.addToCartAjax();
 			this.dropZoneCheckout();
 		}
-
-		slideEffectAjax() {
-			jQuery('.top-cart-contain').on('mouseenter', function () {
-				jQuery(this).find('.top-cart-content').stop(true, true).show();
-			});
-			jQuery('.top-cart-contain').on('mouseleave', function () {
-				jQuery(this).find('.top-cart-content').stop(true, true).hide();
-			});
-		}
-
 		addToCartAjax() {
 			if (jQuery('.btn-add-to-cart-ajax').length) {
 				$(document).on('click', '.btn-add-to-cart-ajax', function () {
-					var data_variation,
-						product_id,
-						variation_id,
-						qty,
-						variation_key,
-						variation_val,
-						var_data = '';
-					var var_data = {};
-					product_id = jQuery(this).attr('data-product_id');
-					variation_id = jQuery(this).attr('data-variation_id');
-					qty = jQuery(this).attr('data-quantity');
-					//console.log("Product ID = "+product_id+ "Variation ID = "+ variation_id + "Quantity = "+ qty);
-					data_variation = jQuery(this).attr('data-variation');
-					var_data = data_variation.split('=');
-					variation_key = var_data['0'];
-					variation_val = var_data['1'];
-					var_data[variation_key] = variation_val;
-					//jQuery(this).prop("disabled", true);
-					const btn = jQuery( this );
-					jQuery(this).html(
+					const btn = jQuery(this);
+					const product_id = btn.attr('data-product_id');
+					const variation_id = btn.attr('data-variation_id');
+					const qty = btn.attr('data-quantity');
+					const data_variation = btn.attr('data-variation').split('=');
+					const var_data = { [data_variation[0]]: data_variation[1] };
+
+					btn.html(
 						'<div class="spinner-border spinner-border-sm text-danger" role="status"> <span class="visually-hidden">Loading...</span> </div>'
 					);
-					btn.parent('.footable-last-visible')
-						.find('.checkout_button')
-						.remove();
-					console.log(
-						'Product ID = ' +
-							product_id +
-							' Variation ID = ' +
-							variation_id +
-							' Quantity = ' +
-							qty +
-							' variation_key=' +
-							variation_key +
-							' variation_val=' +
-							variation_val
-					);
+
+					btn.parent('.footable-last-visible').find('.checkout_button').remove();
+
 					jQuery.ajax({
 						url: ajax_object.ajax_url,
 						data: {
@@ -69,40 +34,36 @@
 							btn.html(
 								'<svg width="25" height="25" fill="var(--bs-danger)"><use href="#icon-cart"></use></svg>'
 							);
+
 							setTimeout(function () {
 								btn.html(
-									'<svg class="d-block mx-auto m-0" width="25" height="25" fill="var(--bs-danger)"> <use href="#icon-cart"></use> </svg>'
+									'<svg class="d-block mx-auto m-0" width="25" height="25" fill="var(--bs-danger)"><use href="#icon-cart"></use></svg>'
 								);
 							}, 1000);
-							console.log(ajax_object.checkout_url);
+
 							btn.parent('.footable-last-visible').append(
-								'<a href="' +
-									ajax_object.checkout_url +
-									'" title="Checkout" alt="Checkout" class="btn checkout_button p-0 ms-2" ><svg width="25" height="25" fill="var(--bs-primary)"><use href="#icon-circle-check"></use></svg></a>'
+								`<a href="${ajax_object.checkout_url}" title="Checkout" alt="Checkout" class="btn checkout_button p-0 ms-2">
+									<svg width="25" height="25" fill="var(--bs-primary)"><use href="#icon-circle-check"></use></svg>
+								</a>`
 							);
 
-							jQuery('.mini-cart').replaceWith(
-								data.fragments['.mini-cart']
-							);
-							jQuery(
-								'div.button-group-single-product'
-							).replaceWith(
-								data.fragments[
-									'div.button-group-single-product'
-								]
-							);
-							jQuery(
-								'div.widget_shopping_cart_content'
-							).replaceWith(
-								data.fragments[
-									'div.widget_shopping_cart_content'
-								]
-							);
-							jQuery('.top-cart-content').css('display', 'block');
+							jQuery('.mini-cart').replaceWith(data.fragments['.mini-cart']);
+							jQuery('div.offcanvas-body-inner').replaceWith(data.fragments['div.offcanvas-body-inner']);
+							jQuery('div.right_cart-subtotal-right').replaceWith(data.fragments['div.right_cart-subtotal-right']);
+
+							jQuery('div.button-group-single-product').replaceWith(data.fragments['div.button-group-single-product']);
+
+							jQuery('div.widget_shopping_cart_content').replaceWith(data.fragments['div.widget_shopping_cart_content']);
+
+							// Trigger the offcanvas to open
+							var offcanvasElement = document.getElementById('offcanvasRight');
+							var bsOffcanvas = new bootstrap.Offcanvas(offcanvasElement);
+							bsOffcanvas.show();
 						},
 					});
 				});
 			}
+
 		}
 
 		dropZoneCheckout() {
@@ -137,6 +98,5 @@
 			}
 		}
 	}
-
 	new AsgardWoocommerce();
 } )( jQuery );
