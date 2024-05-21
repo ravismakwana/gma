@@ -14,4 +14,4 @@ import '../sass/main.scss';
 // import '../img/patterns/c3-150x150.jpeg';
 // import '../img/email.webp';
 // import '../img/payment.webp';
-// import '../img/secure-with-macfee.webp';
+import '../img/secure-with-macfee.webp';

@@ -75,27 +75,27 @@ class Store_Information extends WP_Widget {
 		// Output generated fields
 		echo '<div class="store-info-section text-white">';
 		if ( ! empty( $instance['emailaddress_text'] ) ) {
-			echo '<p><a href="mailto:' . $instance['emailaddress_text'] . '" aria-label="Footer Mail" class="text-white text-decoration-none d-flex align-items-center lh-1 text-break"><svg class="me-2" width="16" height="16" fill="#fff"><use href="#icon-email"></use></svg> ' . $instance['emailaddress_text'] . '</a></p>';
+			echo '<p><a href="mailto:' . $instance['emailaddress_text'] . '" aria-label="Footer Mail" class="text-white text-decoration-none d-flex align-items-center lh-1 text-break"><svg class="me-2" width="16" height="16" fill="#fff"><use href="#icon-email"></use></svg><span class="fw-200"> ' . $instance['emailaddress_text'] . '</span></a></p>';
 		}
         if ( ! empty( $instance['phonenumber_text'] ) ) {
 	        $phoneNumberWhatsAppLink = extractAndCreateWhatsAppLink($instance['phonenumber_text']);
-			echo '<p><a href="'.$phoneNumberWhatsAppLink.'" aria-label="Footer Phone" class="text-white text-decoration-none d-flex align-items-center lh-1" target="_blank"><svg class="me-2" width="16" height="16" fill="#fff"><use href="#icon-whatsapp"></use></svg> ' . $instance['phonenumber_text'] . '</a></p>';
+			echo '<p><a href="'.$phoneNumberWhatsAppLink.'" aria-label="Footer Phone" class="text-white text-decoration-none d-flex align-items-center lh-1" target="_blank"><svg class="me-2" width="16" height="16" fill="#fff"><use href="#icon-whatsapp"></use></svg><span class="fw-200"> ' . $instance['phonenumber_text'] . '</span></a></p>';
 		}
 		if ( (! empty( $instance['mondaytofriday_textarea'] )) || ! empty( $instance['saturday_sunday_timing'] ) ) {
 			echo '<p><strong class="office-hours">Hours  of Operation</strong><br />';
 		}
 		echo '<ul>';
 		if ( ! empty( $instance['mondaytofriday_textarea'] ) ) {
-			echo '<li class="d-flex flex-column mb-2"><span>Monday to Friday</span><span>' . $instance['mondaytofriday_textarea'] . '</span></li>';
+			echo '<li class="d-flex flex-column mb-2"><span>Monday to Friday</span><span class="fw-200">' . $instance['mondaytofriday_textarea'] . '</span></li>';
 		}
         if ( ! empty( $instance['saturday_sunday_timing'] ) ) {
-			echo '<li class="d-flex flex-column mb-2"><span>Saturday to Sunday</span><span>' . $instance['saturday_sunday_timing'] . '</span></li>';
+			echo '<li class="d-flex flex-column mb-2"><span>Saturday to Sunday</span><span class="fw-200">' . $instance['saturday_sunday_timing'] . '</span></li>';
 		}
         if ( ! empty( $instance['timezone_text'] ) ) {
-			echo '<li class="d-flex flex-column mb-2"><span>' . $instance['timezone_text'] . '</span></li></ul>';
+			echo '<li class="d-flex flex-column mb-2"><span class="fw-200">' . $instance['timezone_text'] . '</span></li></ul>';
 		}
         if ( ! empty( $instance['shop_address'] ) ) {
-			echo '<span class="text-white"><p>' . $instance['shop_address'] . '</p></span></div>';
+			echo '<span class="text-white d-flex"><svg class="me-2 mt-1" width="16" height="16" fill="#fff"><use href="#icon-marker"></use></svg><p>' . $instance['shop_address'] . '</p></span></div>';
 		}
 		echo $args['after_widget'];
 	}
