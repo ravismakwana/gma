@@ -19,12 +19,11 @@ defined( 'ABSPATH' ) || exit;
 
 global $post;
 
-$heading = apply_filters( 'woocommerce_product_description_heading', __( 'Description', 'woocommerce' ) );
+//$heading = apply_filters( 'woocommerce_product_description_heading', __( 'Description', 'woocommerce' ) );
 
 ?>
 
-<?php if ( $heading ) : ?>
-	<h2 class="h3 fw-bold"><?php echo esc_html( $heading ); ?></h2>
-<?php endif; ?>
-
+<?php //if ( $heading ) : ?>
+<!--	<h2 class="h3 fw-bold">--><?php //echo esc_html( $heading ); ?><!--</h2>-->
+<?php //endif; ?>
 <?php the_content(); ?>

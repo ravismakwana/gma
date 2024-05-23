@@ -3,6 +3,7 @@
 		constructor() {
 			this.addToCartAjax();
 			this.dropZoneCheckout();
+			this.updateQuantity();
 		}
 		addToCartAjax() {
 			if (jQuery('.btn-add-to-cart-ajax').length) {
@@ -15,7 +16,7 @@
 					const var_data = { [data_variation[0]]: data_variation[1] };
 
 					btn.html(
-						'<div class="spinner-border spinner-border-sm text-danger" role="status"> <span class="visually-hidden">Loading...</span> </div>'
+						'<div class="spinner-border spinner-border-sm text-white" role="status"> <span class="visually-hidden">Loading...</span> </div>'
 					);
 
 					btn.parent('.footable-last-visible').find('.checkout_button').remove();
@@ -32,12 +33,12 @@
 						type: 'POST',
 						success: function (data) {
 							btn.html(
-								'<svg width="25" height="25" fill="var(--bs-danger)"><use href="#icon-cart"></use></svg>'
+								'<svg width="25" height="25" fill="var(--bs-white)"><use href="#icon-cart"></use></svg>'
 							);
 
 							setTimeout(function () {
 								btn.html(
-									'<svg class="d-block mx-auto m-0" width="25" height="25" fill="var(--bs-danger)"><use href="#icon-cart"></use></svg>'
+									'<svg class="d-block mx-auto m-0" width="25" height="25" fill="var(--bs-white)"><use href="#icon-cart"></use></svg>'
 								);
 							}, 1000);
 
@@ -94,6 +95,19 @@
 						);
 						pd.statusbar.hide(); //You choice.
 					},
+				});
+			}
+		}
+
+		updateQuantity(){
+			if (jQuery('.select-qty').length) {
+				$('.select-qty').on('change', function () {
+					// Get the selected value
+					var selectedQuantity = $(this).val();
+					// Find the corresponding button
+					var button = $(this).closest('tr').find('.btn-add-to-cart-ajax');
+					// Set the data-quantity attribute
+					button.attr('data-quantity', selectedQuantity);
 				});
 			}
 		}

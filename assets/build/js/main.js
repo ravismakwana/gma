@@ -107,6 +107,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       _classCallCheck(this, AsgardWoocommerce);
       this.addToCartAjax();
       this.dropZoneCheckout();
+      this.updateQuantity();
     }
     return _createClass(AsgardWoocommerce, [{
       key: "addToCartAjax",
@@ -119,7 +120,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
             var qty = btn.attr('data-quantity');
             var data_variation = btn.attr('data-variation').split('=');
             var var_data = _defineProperty({}, data_variation[0], data_variation[1]);
-            btn.html('<div class="spinner-border spinner-border-sm text-danger" role="status"> <span class="visually-hidden">Loading...</span> </div>');
+            btn.html('<div class="spinner-border spinner-border-sm text-white" role="status"> <span class="visually-hidden">Loading...</span> </div>');
             btn.parent('.footable-last-visible').find('.checkout_button').remove();
             jQuery.ajax({
               url: ajax_object.ajax_url,
@@ -132,9 +133,9 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
               },
               type: 'POST',
               success: function success(data) {
-                btn.html('<svg width="25" height="25" fill="var(--bs-danger)"><use href="#icon-cart"></use></svg>');
+                btn.html('<svg width="25" height="25" fill="var(--bs-white)"><use href="#icon-cart"></use></svg>');
                 setTimeout(function () {
-                  btn.html('<svg class="d-block mx-auto m-0" width="25" height="25" fill="var(--bs-danger)"><use href="#icon-cart"></use></svg>');
+                  btn.html('<svg class="d-block mx-auto m-0" width="25" height="25" fill="var(--bs-white)"><use href="#icon-cart"></use></svg>');
                 }, 1000);
                 btn.parent('.footable-last-visible').append("<a href=\"".concat(ajax_object.checkout_url, "\" title=\"Checkout\" alt=\"Checkout\" class=\"btn checkout_button p-0 ms-2\">\n\t\t\t\t\t\t\t\t\t<svg width=\"25\" height=\"25\" fill=\"var(--bs-primary)\"><use href=\"#icon-circle-check\"></use></svg>\n\t\t\t\t\t\t\t\t</a>"));
                 jQuery('.mini-cart').replaceWith(data.fragments['.mini-cart']);
@@ -179,6 +180,20 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
               }, function (resp, textStatus, jqXHR) {});
               pd.statusbar.hide(); //You choice.
             }
+          });
+        }
+      }
+    }, {
+      key: "updateQuantity",
+      value: function updateQuantity() {
+        if (jQuery('.select-qty').length) {
+          $('.select-qty').on('change', function () {
+            // Get the selected value
+            var selectedQuantity = $(this).val();
+            // Find the corresponding button
+            var button = $(this).closest('tr').find('.btn-add-to-cart-ajax');
+            // Set the data-quantity attribute
+            button.attr('data-quantity', selectedQuantity);
           });
         }
       }
@@ -312,7 +327,7 @@ __webpack_require__.r(__webpack_exports__);
 // import '../img/patterns/c3-150x150.jpeg';
 // import '../img/email.webp';
 // import '../img/payment.webp';
-import '../img/secure-with-macfee.webp';
+
 
 jQuery(document).ready(function ($) {
   /* Trust Pilot Review Slider */

@@ -18,7 +18,7 @@ class Asgard_Shortcodes {
 
 	protected function setup_hooks() {
 		// shortcodes
-//		add_shortcode( 'display_mega_menu', [ $this, 'mega_menu_function' ] );
+		add_shortcode( 'display_mega_menu', [ $this, 'mega_menu_function' ] );
 		add_shortcode( 'current_year', [ $this, 'asgard_current_year' ] );
 	}
 
@@ -65,7 +65,7 @@ class Asgard_Shortcodes {
 			}
 			echo '<ul class="parent-category list-unstyled m-0 ' . $cnt ++ . '===' . $totalCategoryInSingleColumn . '==' . $total . '">
                         <li><a href="' . get_term_link( $parent_product_cat->term_id ) . '" class="parent-category-a text-decoration-none text-primary p-1 position-relative lh-2 d-inline-block text-left w-100">' . $parent_product_cat->name . '<span class="arrow-menu"></span></a>
-                      <ul class="list-unstyled m-0">';
+                      <ul class="list-unstyled my-1">';
 
 			$child_args         = array(
 				'taxonomy'   => 'product_cat',
@@ -75,10 +75,10 @@ class Asgard_Shortcodes {
 			$child_product_cats = get_terms( $child_args );
 			foreach ( $child_product_cats as $child_product_cat ) {
 				$total = $cnt % (int)$totalCategoryInSingleColumn;
-				echo '<li class="' . $cnt ++ . '===' . $totalCategoryInSingleColumn . '==' . $total . '"><a href="' . get_term_link( $child_product_cat->term_id ) . '" class="text-decoration-none text-secondary p-1 position-relative lh-2 d-inline-block text-left w-100">' . $child_product_cat->name . '</a></li>';
+				echo '<li class="' . $cnt ++ . '===' . $totalCategoryInSingleColumn . '==' . $total . '"><a href="' . get_term_link( $child_product_cat->term_id ) . '" class="text-decoration-none text-primary p-1 position-relative lh-1 d-inline-block text-left w-100 fw-200">' . $child_product_cat->name . '</a></li>';
 
 				if ( $total == 0 ) {
-					echo '</ul></div><div class="col-sm-3 single-menu-column p-3"><ul class="list-unstyled m-0">';
+					echo '</ul></div><div class="col-sm-3 single-menu-column p-3"><ul class="list-unstyled my-1 sub-categories">';
 				}
 			}
 			echo '</ul>

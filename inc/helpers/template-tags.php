@@ -561,22 +561,23 @@ if ( ! function_exists ( 'asgard_canvas_right_cart' ) ) {
                     </div>
                 </div>
                 <div class="actions d-flex justify-content-center px-3 flex-column gap-2">
-                    <button class="btn-checkout btn btn-dark order-2 mx-1 text-uppercase fs-16"
-                            title="<?php esc_attr_e('Checkout', 'asgard'); ?>"
-                            type="button"
-                            onClick="window.location.assign('<?php echo esc_js(wc_get_checkout_url()); ?>')">
-                        <svg width="20" height="20" fill="#fff" class="me-1">
-                            <use href="#icon-check"></use>
-                        </svg>
-                        <span><?php esc_attr_e('Checkout', 'asgard'); ?></span>
-                    </button>
-                    <a class="view-cart btn btn-success order-1 mx-1 text-decoration-none text-uppercase fs-16"
+                    <a class="view-cart btn btn-success text-decoration-none text-uppercase"
                        href="<?php echo esc_js(wc_get_cart_url()); ?>">
                         <svg width="20" height="20" fill="#fff" class="me-1">
                             <use href="#icon-cart"></use>
                         </svg>
-                        <span><?php esc_attr_e('View Cart', 'asgard'); ?></span>
+                        <span class="text-white"><?php esc_attr_e('View Cart', 'asgard'); ?></span>
                     </a>
+                    <a class="btn-checkout btn btn-secondary text-uppercase text-white text-decoration-none"
+                            title="<?php esc_attr_e('Checkout', 'asgard'); ?>"
+                            type="button"
+                            href="<?php echo esc_js(wc_get_checkout_url()); ?>">
+                        <svg width="20" height="20" fill="#fff" class="me-1">
+                            <use href="#icon-check"></use>
+                        </svg>
+                        <span><?php esc_attr_e('Checkout', 'asgard'); ?></span>
+                    </a>
+
                 </div>
             </div>
 
