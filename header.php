@@ -19,7 +19,7 @@ if(function_exists('wp_body_open')) {
 	wp_body_open();
 } ?>
 <div class="site" id="page">
-    <header>
+    <header class="bg-white">
         <?php
         get_template_part('template-parts/header/top-bar'); 
         get_template_part('template-parts/header/middle-bar'); 

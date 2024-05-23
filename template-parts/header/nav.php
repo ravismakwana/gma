@@ -21,7 +21,7 @@ $header_menus = wp_get_nav_menu_items( $header_menu_id );
                 </svg>
             </a>
 
-            <span class="nav-link fs-14 text-uppercase all-cate-text pt-0 pb-0 d-none d-sm-none d-md-block lh-1"> All Categories </span>
+            <span class="nav-link fs-14 text-uppercase all-cate-text pt-0 pb-0 d-none d-sm-none d-md-block"> All Categories </span>
         </div>
         <div class="d-block d-sm-block d-md-none">
 			<?php

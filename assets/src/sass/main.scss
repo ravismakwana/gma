@@ -48,18 +48,12 @@ $navbar-light-hover-color: $primary;
 $navbar-light-active-color: $primary;
 
 @import "~bootstrap/scss/bootstrap";
-.btn-primary, .button{
-  &:hover {
-    background-color: #fff;
-    border-color: var(--bs-btn-hover-bg);
-    color: var(--bs-btn-hover-bg);
-    text-decoration: none;
-  }
-}
 
 body {
   font-size: 15px;
   font-family: "Poppins";
+  line-height: 1.85714285714286;
+  background-color: #f4f5f6;
 }
 .fw-200 {
   font-weight: 200;
@@ -172,10 +166,10 @@ body {
   }
 
   .all-cate-text {
-    line-height: 29px;
+    line-height: 42px;
   }
   .show_mega_menu_block {
-    top: 46px;
+    top: 42px;
     width: calc(100% - (var(--bs-gutter-x)));
     z-index: 2;
   }

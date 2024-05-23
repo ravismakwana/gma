@@ -21,7 +21,7 @@ $rating_count = $review_count = count( $YWAR_AdvancedReview->get_product_reviews
 $average      = $YWAR_AdvancedReview->get_average_rating( $product_id );
 
 if ( $rating_count > 0 ) : ?>
-	<div class="woocommerce-product-rating" itemprop="aggregateRating"
+	<div class="woocommerce-product-rating mb-2" itemprop="aggregateRating"
 	     itemtype="http://schema.org/AggregateRating">
 		<div class="star-rating" title="<?php printf( __( 'Rated %s out of 5', 'yith-woocommerce-advanced-reviews' ), $average ); ?>">
 			<span style="width:<?php echo( ( $average / 5 ) * 100 ); ?>%">

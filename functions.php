@@ -66,7 +66,8 @@ remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_pr
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
 //remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
-remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
+//remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
 remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
 remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
 remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
@@ -80,8 +81,12 @@ add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_produ
 add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_rating', 8 );
 add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_price', 9 );
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 14 );
+add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 21 );
+
 
 add_filter( 'woocommerce_product_get_rating_html', 'custom_add_star_rating_class', 10, 3 );
+add_filter( 'woocommerce_product_price_class', 'asgard_woocommerce_add_product_price_class' );
+
 function custom_add_star_rating_class( $html, $rating, $count ) {
 
 	if ( 0 < $rating ) {
@@ -216,3 +221,11 @@ if(!function_exists('genericmedsaustralia_trust_pilot_section_shortcode')) {
 }
 // add_action('woocommerce_after_single_product_summary', 'genericmedsaustralia_trust_pilot_section', 9);
 add_shortcode('SITE_REVIEW', 'genericmedsaustralia_trust_pilot_section_shortcode');
+
+function asgard_woocommerce_add_product_price_class( $class ){
+	// Add additional classes
+	$additional_classes = 'price text-dark fw-bold fs-4 mb-2';
+
+	// Combine the original class with the additional classes
+	return $class . ' ' . $additional_classes;
+}

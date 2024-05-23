@@ -23,7 +23,7 @@ if ( ! comments_open() ) {
 	return;
 }
 ?>
-<div id="reviews" class="woocommerce-Reviews my-5">
+<div id="reviews" class="woocommerce-Reviews my-4 pt-1">
     <div id="comments">
         <h2 class="woocommerce-Reviews-title h3 fw-bold d-inline-block"><?php
 			if (get_option('woocommerce_enable_review_rating') === 'yes' && ($count = $product->get_review_count())) {

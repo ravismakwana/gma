@@ -45,7 +45,7 @@ class Asgard_Woocommerce {
 
 
 		// add_filter( 'woocommerce_variable_price_html', [ $this, 'asgard_custom_variation_price' ], 10, 2 );
-		add_action( 'woocommerce_single_product_summary', [ $this, 'woocommerce_add_attributes' ], 21 );
+		add_action( 'woocommerce_single_product_summary', [ $this, 'woocommerce_add_attributes' ], 22 );
 		add_action( 'woocommerce_after_single_product_summary', [ $this, 'display_variation_in_table_format' ], 5 );
 		add_action( 'woocommerce_share', [ $this, 'product_share_single_product_page' ], 10 );
 		add_action( 'wp_ajax_nopriv_woocommerce_add_variation_to_cart', [
@@ -66,14 +66,8 @@ class Asgard_Woocommerce {
 			$this,
 			'asgard_single_product_images_and_summary_div_end'
 		], 1 );
-		add_action( 'woocommerce_after_single_product_summary', [
-			$this,
-			'asgard_woocommerce_output_product_content_and_reviews'
-		], 10 );
-		add_filter( 'woocommerce_product_tabs', [
-			$this,
-			'bbloomer_remove_product_tabs'
-		], 9999 );
+
+		add_filter( 'woocommerce_product_tabs', [ $this, 'asgard_remove_woo_additional_product_tabs' ], 98, 1 );
 		add_filter( 'woocommerce_form_field', [ $this, 'asgard_remove_checkout_optional_text' ], 10, 4 );
 		add_filter( 'woocommerce_account_menu_item_classes', [ $this, 'asgard_custom_wc_account_menu_item_classes' ], 10, 2 );
 		add_filter( 'woocommerce_product_loop_title_classes', [ $this, 'asgard_woocommerce_product_loop_title_classes' ], 10, 1 );
@@ -117,6 +111,8 @@ class Asgard_Woocommerce {
         add_filter( 'woocommerce_package_rates', [ $this, 'asgard_hide_shipping_when_free_is_available' ], 100, 1 );
         add_filter( 'gettext', [ $this, 'asgard_translate_bic_to_swift_code' ], 10, 3 );
         add_filter( 'woocommerce_cart_item_thumbnail', [ $this, 'asgard_woocommerce_add_class_to_cart_item_thumbnail' ], 10, 3 );
+
+
         //email
 //        add_filter( 'woocommerce_email_order_items_args', [ $this, 'asgard_add_sku_to_wc_emails' ], 10, 1 );
         add_filter( 'woocommerce_cod_process_payment_order_status', [ $this, 'asgard_change_cod_payment_order_status' ], 15 );
@@ -129,6 +125,8 @@ class Asgard_Woocommerce {
         add_filter( 'woocommerce_email_recipient_cancelled_order', [ $this, 'asgard_wc_cancelled_order_add_customer_email' ], 10, 2 );
         add_filter( 'woocommerce_email_recipient_failed_order', [ $this, 'asgard_wc_cancelled_order_add_customer_email' ], 10, 2 );
         add_filter( 'woocommerce_shop_order_search_results', [ $this, 'asgard_custom_shop_order_search_results_filter' ], 10, 3 );
+        add_filter( 'woocommerce_currency_symbol', [ $this, 'asgard_woocommerce_change_existing_currency_symbol' ], 10, 2 );
+        add_filter( 'default_checkout_billing_country', [ $this, 'asgard_woocommerce_change_default_checkout_country' ], 10, 2 );
 
         add_filter( 'woocommerce_email_recipient_customer_completed_order', [ $this, 'asgard_admin_email_recipient_filter_function' ], 10, 2 );
         add_filter( 'woocommerce_email_recipient_customer_shipped_order', [ $this, 'asgard_admin_email_recipient_filter_function' ], 10, 2 );
@@ -156,6 +154,10 @@ class Asgard_Woocommerce {
         add_action( 'kt_amp_build_product', [ $this, 'asgard_display_variation_in_table_format_amp' ], 10 );
         add_action( 'kt_amp_header_after', [ $this, 'asgard_amp_search_for_product' ], 10 );
         add_action( 'kt_amp_header_content_up', [ $this, 'asgard_kt_amp_header_content_up_function' ], 10 );
+
+        // Medicine type
+        add_action('woocommerce_product_options_advanced', [ $this, 'asgard_woocommerce_custom_product_data_tab_content'], 10);
+        add_action('woocommerce_process_product_meta', [ $this, 'asgard_woocommerce_save_custom_product_data'], 10, 1);
 	}
 
 	public function asgard_woocommerce_header_add_to_cart_fragment() {
@@ -280,8 +282,8 @@ class Asgard_Woocommerce {
 		$price      = max( $prices );
 		$unit_price = $price / max( $min_price );
 		$final_unit = round( number_format( $unit_price, 2 ), 2 );
-
-		return 'Just $' . $final_unit . ' /Piece';
+        $medicineType = !empty(get_post_meta($product->get_id(), '_medicine_type', true)) ? get_post_meta($product->get_id(), '_medicine_type', true) : 'Piece'; // Corrected variable name and added get_id()
+		return 'Just '.get_woocommerce_currency_symbol() . $final_unit . ' / '.$medicineType;
 	}
 
 	public function woocommerce_add_attributes() {
@@ -372,32 +374,21 @@ class Asgard_Woocommerce {
                 <table class="product_type table align-middle table-borderless mb-0">
                     <tbody>
                     <tr>
-                        <td class="p_image d-lg-table-cell d-md-block d-block">
-                            <div class="product_img">
-                                <a class="thumbnail" href="#">
-                                    <img src="<?php echo $product_variations[0]['image']['gallery_thumbnail_src']; ?>"
-                                         title="<?php echo $product_variations[0]['image']['title']; ?>"
-                                         alt="<?php echo $product_variations[0]['image']['alt']; ?>"
-                                         class="img-fluid img-thumbnail mx-auto d-block border border-primary border-opacity-25"
-                                         width="<?php echo $product_variations[0]['image']['gallery_thumbnail_src_w']; ?>">
-                                </a>
-                            </div>
-                        </td>
                         <td class="block d-lg-table-cell d-md-block d-block px-0">
-                            <table class="text-center table footable footable-1 table-bordered table-hover border border-primary border-opacity-25"
+                            <table class="text-center table footable footable-1 table-bordered table-hover border border-dark border-opacity-25"
                                    data-toggle-column="last" product-id="<?php echo $id; ?>">
                                 <thead>
                                 <tr class="row-title">
-                                    <th colspan="5" class="bg-primary-subtle"><h2
-                                                class="variation-product-title h5 mb-0 py-1 text-primary"><?php echo $product->get_title() . ' - ' . $attribute_name; ?></h2>
+                                    <th colspan="5"><h2
+                                                class="variation-product-title h5 mb-0 py-1 text-dark"><?php echo $product->get_title() . ' - ' . $attribute_name; ?></h2>
                                     </th>
                                 </tr>
                                 <tr class="footable-header">
-                                    <th class="footable-first-visible text-primary"><?php echo $attribute_name; ?></th>
-                                    <th class="text-primary">Price</th>
-                                    <th class="hide-mobile text-primary d-none d-lg-table-cell">Price/unit</th>
-                                    <th class="text-primary">Quantity</th>
-                                    <th class="footable-last-visible text-primary">Add To Cart</th>
+                                    <th class="footable-first-visible text-dark"><?php echo $attribute_name; ?></th>
+                                    <th class="text-dark">Price</th>
+                                    <th class="hide-mobile text-dark d-none d-lg-table-cell">Price/unit</th>
+                                    <th class="text-dark">Quantity</th>
+                                    <th class="footable-last-visible text-dark">Add To Cart</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -407,20 +398,21 @@ class Asgard_Woocommerce {
 //                                    print_r($product_variation);
 //                                    echo '</pre>';
 									$attribute = array_values( $product_variation['attributes'] );
+                                    $medicineTpe = !empty(get_post_meta($id, '_medicine_type', true)) ? get_post_meta($id, '_medicine_type', true) : 'Piece';
 									?>
                                     <tr>
                                         <td class="footable-first-visible align-middle"><?php echo( $attribute[0] ); ?></td>
                                         <td class="align-middle"><?php echo get_woocommerce_currency_symbol() . $product_variation['display_price']; ?></td>
-                                        <td class="hide-mobile align-middle text-danger d-none d-lg-table-cell">
+                                        <td class="hide-mobile align-middle d-none d-lg-table-cell">
 											<?php
 											$tablets    = explode( ' ', $attribute[0] );
 											$unit_price = $product_variation['display_price'] / $tablets[0];
 											$final_unit = round( number_format( $unit_price, 2 ), 2 );
-											echo '$' . $final_unit . ' /Piece';
+											echo get_woocommerce_currency_symbol() . $final_unit . ' /' . $medicineTpe;
 											?>
                                         </td>
                                         <td class="align-middle">
-                                            <select class="form-control select-qty form-select form-select-sm border border-primary border-opacity-50"
+                                            <select class="form-control select-qty form-select form-select-sm border border-dark border-opacity-50"
                                                     aria-label="Select Qty">
                                                 <option selected="selected">1</option>
                                                 <option>2</option>
@@ -447,23 +439,25 @@ class Asgard_Woocommerce {
 											} else {
 												?>
                                             <button type="button"
-                                                    class="btn-add-to-cart-ajax btn btn-link btn-color-orange 1-261 p-0"
+                                                    class="btn-add-to-cart-ajax btn btn-success"
                                                     data-product_id="<?php echo abs( $id ); ?>"
                                                     data-variation_id="<?php echo abs( $product_variation["variation_id"] ); ?>"
                                                     data-quantity="1" data-variation="<?php echo $attr; ?>">
                                                     <svg class="d-block mx-auto m-0" width="25" height="25"
-                                                         fill="var(--bs-danger)">
+                                                         fill="var(--bs-white)">
                                                         <use href="#icon-cart"></use>
                                                     </svg>
                                                 </button><?php
 											}
 											?>
-                                            <!--<a href="<?php echo get_the_permalink() . '?add-to-cart=' . $id . '&quantity=1&variation_id=' . $product_variation["variation_id"] . '&' . $attr . ''; ?>" class="btn btn-primary btn-add-to-cart-ajax">add to cart</a>-->
                                         </td>
                                     </tr>
 									<?php
 								}
 								?>
+								<tr class="text-center">
+                                    <td colspan="5">Want to order in bulk / B2B price? <a href="/bulk-inquiry?productName=<?php echo $product->get_title(); ?>" class="btn btn-sm btn-primary ms-sm-2" >Send Inquiry</a></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </td>
@@ -517,14 +511,14 @@ class Asgard_Woocommerce {
                         </svg>
                     </a>
                 </li>
-                <li class="list-inline-item">
-                    <a href="https://api.whatsapp.com/send?&text=%20<?php echo get_permalink( $product_id ); ?>"
-                       target="_blank">
-                        <svg width="20" height="20" fill="var(--bs-primary)">
-                            <use href="#icon-whatsapp"></use>
-                        </svg>
-                    </a>
-                </li>
+<!--                <li class="list-inline-item">-->
+<!--                    <a href="https://api.whatsapp.com/send?&text=%20--><?php //echo get_permalink( $product_id ); ?><!--"-->
+<!--                       target="_blank">-->
+<!--                        <svg width="20" height="20" fill="var(--bs-primary)">-->
+<!--                            <use href="#icon-whatsapp"></use>-->
+<!--                        </svg>-->
+<!--                    </a>-->
+<!--                </li>-->
             </ul>
         </div>
 		<?php
@@ -572,10 +566,10 @@ class Asgard_Woocommerce {
             <div class="check-out-buttons ' . $itemClass . '  align-items-end flex-column">
 				<ul class="list-inline mb-2 p-0 ">
 					<li class="list-inline-item">
-						<a href="' . wc_get_cart_url() . '" class="view-cart btn btn-success  text-decoration-none text-uppercase fs-12">View cart</a>
+						<a href="' . wc_get_cart_url() . '" class="text-white view-cart btn btn-success  text-decoration-none text-uppercase fs-12">View cart</a>
 					</li>
 					<li class="list-inline-item">
-						<a href="' . wc_get_checkout_url() . '" class="view-checkout btn btn-dark text-decoration-none text-uppercase fs-12">Checkout</a>
+						<a href="' . wc_get_checkout_url() . '" class="text-white view-checkout btn btn-secondary text-decoration-none text-uppercase fs-12">Checkout</a>
 					</li>
 				</ul>
 				<div class="secure-img">
@@ -653,11 +647,11 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
                 <ul class="list-inline mb-2 p-0 ">
                     <li class="list-inline-item">
                         <a href="<?php echo wc_get_cart_url(); ?>"
-                           class="view-cart btn btn-success  text-decoration-none text-uppercase fs-12">View cart</a>
+                           class="text-white view-cart btn btn-success  text-decoration-none text-uppercase fs-12">View cart</a>
                     </li>
                     <li class="list-inline-item">
                         <a href="<?php echo wc_get_checkout_url(); ?>"
-                           class="view-checkout btn btn-dark text-decoration-none text-uppercase fs-12 ">Checkout</a>
+                           class="text-white view-checkout btn btn-secondary text-white text-decoration-none text-uppercase fs-12 ">Checkout</a>
                     </li>
                 </ul>
                 <div class="secure-img">
@@ -679,7 +673,7 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
 
 	public function asgard_woocommerce_show_product_images() {
 		global $product;
-		echo "<div class='col-lg-4 mt-4 order-2 order-lg-1 d-none d-lg-block single-product-image'>" . $product->get_image() . "</div>";
+		echo "<div class='col-lg-6 mt-4 mt-lg-0 order-2 order-lg-1 d-lg-block single-product-image'>" . $product->get_image('woocommerce_single') . "</div>";
 	}
 
 	public function enable_gutenberg_for_product_page( $can_edit, $post_type ) {
@@ -972,7 +966,7 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
     public function asgard_woocommerce_loop_add_to_cart_link($link, $product) {
 	    $args = array();
 	    $args['class'] = isset($args['class']) ? $args['class'] : 'btn btn-primary rounded-pill'; // Default class if not set
-	    $args['class'] .= ' fs-14 btn btn-primary rounded-pill'; // Add the custom class
+	    $args['class'] .= ' d-none fs-14 '; // Add the custom class
 
 	    $link = preg_replace('/class="([^"]*)"/', 'class="' . esc_attr($args['class']) . '"', $link);
 
@@ -1276,7 +1270,7 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
         remove_action('woocommerce_email_order_details', array(WC()->structured_data, 'output_email_structured_data'), 30); // Emails
     }
     public function asgard_change_woocommerce_order_number( $order_id ){
-        $prefix = '300';
+        $prefix = 'GMA';
         $new_order_id = $prefix . $order_id;
         return $new_order_id;
     }
@@ -1286,9 +1280,9 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
     public function asgard_custom_shop_order_search_results_filter( $order_ids, $term, $search_fields ){
         global $wpdb;
         if(strpos($term, '#') !== false){
-            $term = preg_replace('/#[[:<:]]300/', '', $term); //  <===  <===  <===  Your change
+            $term = preg_replace('/#[[:<:]]GMA/', '', $term); //  <===  <===  <===  Your change
         } else{
-            $term = preg_replace('/[[:<:]]300/', '', $term); //  <===  <===  <===  Your change
+            $term = preg_replace('/[[:<:]]GMA/', '', $term); //  <===  <===  <===  Your change
         }
         $order_ids = array();
 
@@ -1469,15 +1463,15 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
     public function asgard_add_view_counter(){
         if ( shortcode_exists( 'post-views' ) ) {
 		    ?>
-		    <div class="d-flex align-items-center justify-content-between">
-            <div class="woocommerce-product-rating view-counter d-flex align-items-center">
+		    <div class="d-flex align-items-center justify-content-between mb-3">
+            <div class="view-counter d-flex align-items-center">
 			    <?php echo do_shortcode( '[post-views]' ).'<div class="ms-2 viewd"> Viewed</div>'; ?>
             </div>
-			<div class="woocommerce-product-rating">
-<!--			    <a class="d-flex align-items-center text-primary lh-1" href="https://tawk.to/arrowmeds" target="_blank">-->
-<!--                    <svg width="20" height="20" fill="var(--bs-primary)" class="me-2"><use href="#icon-chat"></use></svg>-->
-<!--					Talk to Expert-->
-<!--				</a>-->
+			<div class="woocommerce-product-rating mb-0">
+			    <a class="d-flex align-items-center text-primary lh-1" href="https://tawk.to/genericmedsaustralia" target="_blank">
+                    <svg width="20" height="20" fill="var(--bs-primary)" class="me-2"><use href="#icon-chat"></use></svg>
+					Talk to Expert
+				</a>
             </div>
                 </div>
 		    <?php
@@ -1561,6 +1555,7 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
                                 <?php
                                 foreach ($product_variations as $key => $product_variation) {
                                     $attribute = array_values($product_variation['attributes']);
+                                    $medicineTpe = !empty(get_post_meta($id, '_medicine_type', true)) ? get_post_meta($id, '_medicine_type', true) : 'Piece';
                                     ?>
                                     <tr>
                                         <td class="footable-first-visible"><?php echo($attribute[0]); ?></td>
@@ -1570,7 +1565,7 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
                                             $tablets = explode(' ', $attribute[0]);
                                             $unit_price = $product_variation['display_price'] / $tablets[0];
                                             $final_unit = round(number_format($unit_price, 2), 2);
-                                            echo '$' . $final_unit . ' /Piece';
+                                            echo get_woocommerce_currency_symbol() . $final_unit . ' /' . $medicineTpe;
                                             ?>
                                         </td>
                                         <td>
@@ -1609,6 +1604,7 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
                                     <?php
                                 }
                                 ?>
+
                                 </tbody>
                             </table>
                         </td>
@@ -1672,5 +1668,96 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
 
         return $img_tag;
     }
+
+    public function asgard_remove_woo_additional_product_tabs( $tabs ){
+        unset( $tabs['additional_information'] );  	// Remove the additional information tab
+        return $tabs;
+    }
+
+    public function asgard_woocommerce_change_default_checkout_country() {
+      return 'AU'; // country code
+    }
+
+    public function asgard_woocommerce_change_existing_currency_symbol( $currency_symbol, $currency ){
+        switch( $currency ) {
+              case 'AUD': $currency_symbol = 'AUD$'; break;
+         }
+         return $currency_symbol;
+    }
+
+    public function asgard_woocommerce_custom_product_data_tab_content(){
+        global $post;
+
+        // Select box options
+        $options = array(
+            'Accuhaler'          => __('Accuhaler', 'gma'),
+            'Ampoule'            => __('Ampoule', 'gma'),
+            'Box'                => __('Box', 'gma'),
+            'Bottle'             => __('Bottle', 'gma'),
+            'Cream'              => __('Cream', 'gma'),
+            'Capsules'           => __('Capsules', 'gma'),
+            'Eye Drop'           => __('Eye Drop', 'gma'),
+            'ED Pack'            => __('ED Pack', 'gma'),
+            'Gel'                => __('Gel', 'gma'),
+            'Glucometer'         => __('Glucometer', 'gma'),
+            'Gum'                => __('Gum', 'gma'),
+            'Injection'          => __('Injection', 'gma'),
+            'Inhaler'            => __('Inhaler', 'gma'),
+            'Jelly'              => __('Jelly', 'gma'),
+            'Kit'                => __('Kit', 'gma'),
+            'Lancets'            => __('Lancets', 'gma'),
+            'Multihaler'         => __('Multihaler', 'gma'),
+            'Needle'             => __('Needle', 'gma'),
+            'Ointment'           => __('Ointment', 'gma'),
+            'Oral film'          => __('Oral film', 'gma'),
+            'Pack'               => __('Pack', 'gma'),
+            'Patche'             => __('Patche', 'gma'),
+            'Pen'                => __('Pen', 'gma'),
+            'Prefilled Syringe'  => __('Prefilled Syringe', 'gma'),
+            'Respules'           => __('Respules', 'gma'),
+            'Rotacaps'           => __('Rotacaps', 'gma'),
+            'Tablet'             => __('Tablet', 'gma'),
+            'Tube'               => __('Tube', 'gma'),
+            'Turbuhaler'         => __('Turbuhaler', 'gma'),
+            'Sachet'             => __('Sachet', 'gma'),
+            'Shampoo'            => __('Shampoo', 'gma'),
+            'Suppositorie'       => __('Suppositorie', 'gma'),
+            'Sof Capsules'       => __('Sof Capsules', 'gma'),
+            'Spray'              => __('Spray', 'gma'),
+            'Lotion'              => __('Lotion', 'gma'),
+            'Vial'               => __('Vial', 'gma'),
+            'Vials'              => __('Vials', 'gma'),
+            'Syrup'              => __('Syrup', 'gma'),
+            'Syringe'              => __('Syringe', 'gma'),
+            'Nasal Spray'              => __('Nasal Spray', 'gma'),
+            'Pill'              => __('Pill', 'gma'),
+            'Strip'              => __('Strip', 'gma'),
+            'Patche'              => __('Patche', 'gma'),
+            'Unit'              => __('Unit', 'gma'),
+        );
+
+
+        // Get the selected value
+        $selected_value = get_post_meta($post->ID, '_medicine_type', true);
+
+        // Output the select box
+        echo '<div class="options_group">';
+
+        woocommerce_wp_select(
+            array(
+                'id'      => '_medicine_type',
+                'label'   => __('Medicine Type', 'gma'),
+                'options' => $options,
+            )
+        );
+
+        echo '</div>';
+    }
+
+    public function asgard_woocommerce_save_custom_product_data( $post_id ){
+        $medicine_type = isset($_POST['_medicine_type']) ? sanitize_text_field($_POST['_medicine_type']) : '';
+        update_post_meta($post_id, '_medicine_type', $medicine_type);
+    }
+
 }
 
