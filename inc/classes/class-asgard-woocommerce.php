@@ -704,7 +704,7 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
 			'maxlength'   => 32,
 			'text-danger'    => false,
 			'label_class' => array( 'form-label fs-14 lh-1' ),
-			'input_class' => array( 'input-text form-control border border-secondary border-opacity-75' ),
+			'input_class' => array( 'input-text form-control border border-primary border-opacity-25' ),
 		), $checkout->get_value( 'physician_name' ) );
 
 		woocommerce_form_field( 'physician_phone', array(
@@ -715,7 +715,7 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
 			'maxlength'   => 10,
 			'text-danger'    => false,
 			'label_class' => array( 'form-label fs-14 lh-1' ),
-			'input_class' => array( 'input-text form-control border border-secondary border-opacity-75' ),
+			'input_class' => array( 'input-text form-control border border-primary border-opacity-25' ),
 		), $checkout->get_value( 'physician_phone' ) );
 
 		woocommerce_form_field( 'drug_allergies', array(
@@ -726,7 +726,7 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
 			'maxlength'   => 32,
 			'text-danger'    => false,
 			'label_class' => array( 'form-label fs-14 lh-1' ),
-			'input_class' => array( 'input-text form-control border border-secondary border-opacity-75' ),
+			'input_class' => array( 'input-text form-control border border-primary border-opacity-25' ),
 		), $checkout->get_value( 'drug_allergies' ) );
 		woocommerce_form_field( 'current_medications', array(
 			'type'        => 'text',
@@ -736,7 +736,7 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
 			'maxlength'   => 32,
 			'text-danger'    => false,
 			'label_class' => array( 'form-label fs-14 lh-1' ),
-			'input_class' => array( 'input-text form-control border border-secondary border-opacity-75' ),
+			'input_class' => array( 'input-text form-control border border-primary border-opacity-25' ),
 		), $checkout->get_value( 'current_medications' ) );
 		woocommerce_form_field( 'current_treatments', array(
 			'type'        => 'text',
@@ -746,7 +746,7 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
 			'maxlength'   => 32,
 			'text-danger'    => false,
 			'label_class' => array( 'form-label fs-14 lh-1' ),
-			'input_class' => array( 'input-text form-control border border-secondary border-opacity-75' ),
+			'input_class' => array( 'input-text form-control border border-primary border-opacity-25' ),
 		), $checkout->get_value( 'current_treatments' ) );
 		echo '<div class="d-flex">';
 		woocommerce_form_field( 'smoke', array(
@@ -757,7 +757,7 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
 			'default'     => 0,
 			'options'     => array( 'No', 'Yes' ),
 			'label_class' => array( 'fs-14 lh-1 form-check-label flex-fill mt-0' ),
-			'input_class' => array( 'form-check-input border border-secondary border-opacity-75 mt-0 ms-0 me-2' ),
+			'input_class' => array( 'form-check-input border border-primary border-opacity-25 mt-0 ms-0 me-2' ),
 		), $checkout->get_value( 'smoke' ) );
 		woocommerce_form_field( 'drink_alcohol', array(
 			'type'        => 'radio',
@@ -767,7 +767,7 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
 			'default'     => 0,
 			'options'     => array( 'No', 'Yes' ),
 			'label_class' => array( 'fs-14 lh-1 form-check-label flex-fill mt-0' ),
-			'input_class' => array( 'form-check-input border border-secondary border-opacity-75 mt-0 ms-0 me-2' ),
+			'input_class' => array( 'form-check-input border border-primary border-opacity-25 mt-0 ms-0 me-2' ),
 		), $checkout->get_value( 'drink_alcohol' ) );
 		echo '</div>';
 		echo ''
@@ -960,7 +960,7 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
     }
 
     public function asgard_woocommerce_product_loop_title_classes($classes){
-	    $classes = 'h6 woo-title text-truncate-2';
+	    $classes = 'h6 woo-title text-truncate-2 fw-semibold';
 	    return $classes;
     }
     public function asgard_woocommerce_loop_add_to_cart_link($link, $product) {

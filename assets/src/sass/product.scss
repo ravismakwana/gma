@@ -60,7 +60,15 @@
     .related {
       .products {
         .star-rating {
-          margin: 1rem auto;
+          margin: 0rem auto;
+          float: unset !important;
+          font-family: star !important;
+          font-size: 1em !important;
+          height: 24px !important;
+          line-height: 1;
+          overflow: hidden !important;
+          position: relative !important;
+          width: 5.4em !important;
         }
         .card {
           a {

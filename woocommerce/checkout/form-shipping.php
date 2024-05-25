@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit;
 
 				foreach ( $fields as $key => $field ) {
 					$field['class'] = array_merge($field['class'], array('mb-3', ''));
-					$field['input_class'] = array('form-control border border-secondary border-opacity-75'); // Add Bootstrap input class
+					$field['input_class'] = array('form-control border border-primary border-opacity-25'); // Add Bootstrap input class
 					$field['label_class'] = array('form-label fs-14 lh-1'); // Add Bootstrap label class
 					woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
 				}
@@ -65,7 +65,7 @@ defined( 'ABSPATH' ) || exit;
 			<?php foreach ( $checkout->get_checkout_fields( 'order' ) as $key => $field ) : ?>
 				<?php
 				$field['class'] = array_merge($field['class'], array('mb-3', ''));
-				$field['input_class'] = array('form-control border border-secondary border-opacity-75'); // Add Bootstrap input class
+				$field['input_class'] = array('form-control border-primary border-opacity-25'); // Add Bootstrap input class
 				$field['label_class'] = array('form-label fs-14 lh-1'); // Add Bootstrap label class
                 woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
                 ?>

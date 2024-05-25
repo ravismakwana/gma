@@ -28,7 +28,7 @@ if ( apply_filters( 'woocommerce_checkout_show_terms', true ) && function_exists
 
             <div class="form-row validate-required form-check">
                 <input type="checkbox" class="form-check-input" name="terms" <?php checked( apply_filters( 'woocommerce_terms_is_checked_default', isset( $_POST['terms'] ) ), true ); // WPCS: input var ok, csrf ok. ?> id="terms"  />
-                <label class="form-check-label woocommerce-form__label woocommerce-form__label-for-checkbox lh-sm mb-0"" for="terms"><?php wc_terms_and_conditions_checkbox_text(); ?></span>&nbsp;<abbr class="required" title="<?php esc_attr_e( 'required', 'woocommerce' ); ?>">*</abbr></label>
+                <label class="form-check-label woocommerce-form__label woocommerce-form__label-for-checkbox lh-sm mb-0" for="terms"><?php wc_terms_and_conditions_checkbox_text(); ?></span>&nbsp;<abbr class="required" title="<?php esc_attr_e( 'required', 'woocommerce' ); ?>">*</abbr></label>
                 <input type="hidden" name="terms-field" value="1" />
             </div>
 		<?php endif; ?>

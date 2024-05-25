@@ -83,6 +83,8 @@ add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_price
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 14 );
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 21 );
 
+add_action('woocommerce_after_single_product_summary', 'genericmedsaustralia_trust_pilot_section', 8);
+add_shortcode('SITE_REVIEW', 'genericmedsaustralia_trust_pilot_section_shortcode');
 
 add_filter( 'woocommerce_product_get_rating_html', 'custom_add_star_rating_class', 10, 3 );
 add_filter( 'woocommerce_product_price_class', 'asgard_woocommerce_add_product_price_class' );
@@ -219,8 +221,6 @@ if(!function_exists('genericmedsaustralia_trust_pilot_section_shortcode')) {
 			return $data;
 	}
 }
-// add_action('woocommerce_after_single_product_summary', 'genericmedsaustralia_trust_pilot_section', 9);
-add_shortcode('SITE_REVIEW', 'genericmedsaustralia_trust_pilot_section_shortcode');
 
 function asgard_woocommerce_add_product_price_class( $class ){
 	// Add additional classes
