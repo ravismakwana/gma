@@ -21,9 +21,9 @@ get_header( 'shop' );
 $paged = get_query_var('paged') ? get_query_var('paged') : 1;
 $paged = !empty($_POST['page']) ? filter_var( $_POST['page'], FILTER_VALIDATE_INT ) + 1 : $paged;
 ?>
-    <div class="container">
+    <div class="container bg-white p-3 p-lg-5 my-3 my-lg-5">
         <div class="row">
-            <div class="col-lg-9 mt-3"><?php
+            <div class="col-lg-12 mt-3"><?php
 				/**
 				 * Hook: woocommerce_before_main_content.
 				 *
@@ -151,16 +151,6 @@ $paged = !empty($_POST['page']) ? filter_var( $_POST['page'], FILTER_VALIDATE_IN
 				 */
 				do_action( 'woocommerce_after_main_content' );
 				wp_reset_postdata();
-				?>
-            </div>
-            <div class="col-lg-3 mt-3">
-				<?php
-				/**
-				 * Hook: woocommerce_sidebar.
-				 *
-				 * @hooked woocommerce_get_sidebar - 10
-				 */
-				do_action( 'woocommerce_sidebar' );
 				?>
             </div>
         </div>
