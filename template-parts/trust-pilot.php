@@ -278,7 +278,7 @@ if (!function_exists('_trsut_pilot_reviews_slider')) {
         $the_query = new WP_Query($args);
         $sumofReviews = $totalTrust = 0;
         $published_reviews = wp_count_posts($post_type = 'site-review')->publish;
-        if ($the_query->have_posts()) {
+        if ($the_query->have_posts() && !empty($published_reviews)) {
             echo '<ul class="review_slider">';
             while ($the_query->have_posts()) {
                 $the_query->the_post();

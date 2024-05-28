@@ -11,6 +11,7 @@ _book
 nbproject
 nbproject/private/
 nbbuild/
+build
 dist/
 nbdist/
 nbactions.xml
