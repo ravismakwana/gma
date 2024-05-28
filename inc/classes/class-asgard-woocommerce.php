@@ -974,7 +974,7 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
     }
 
     public function asgard_woocommerce_before_shop_loop_item_add_div(){
-        echo "<div class='card border border-primary border-opacity-75'>";
+        echo "<div class='card border-0 border-primary border-opacity-75 px-2'>";
     }
 	public function asgard_woocommerce_after_shop_loop_item_end_div(){
 		echo "</div>";
@@ -1760,4 +1760,3 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
     }
 
 }
-
