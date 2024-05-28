@@ -63,6 +63,7 @@ class ASGARD_THEME {
 		/** post thumbnail **/
 		add_theme_support( 'post-thumbnails' );
 		add_image_size('featured-thumbnail', 514, 206, true);
+		add_image_size('blog-thumbnail', 1000, 1000, true);
 
 		/** Feed Links **/
 		add_theme_support( 'automatic-feed-links' );

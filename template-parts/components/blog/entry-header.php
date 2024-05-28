@@ -10,7 +10,7 @@ $hide_page_title    = get_post_meta( $the_post_id, '_hide_page_title', true );
 $has_post_thumbnail = get_the_post_thumbnail( $the_post_id );
 $heading_class      = !empty( $hide_page_title ) && 'yes' == $hide_page_title ? 'hide' : '';
 ?>
-<header class="entry-header">
+<header class="entry-header p-3 pb-0">
 	<?php
 	// Featured image
 	if ( $has_post_thumbnail ) {
@@ -22,9 +22,8 @@ $heading_class      = !empty( $hide_page_title ) && 'yes' == $hide_page_title ? 
 				        <?php
 				        the_post_custom_thumbnail(
 					        $the_post_id,
-					        'featured-thumbnail',
+					        'blog-thumbnail',
 					        [
-						        'sizes' => '(max-width: 364px) 364px, 146px ',
 						        'class' => 'attachment-featured-large size-featured-image card-img-top',
 					        ]
 				        )

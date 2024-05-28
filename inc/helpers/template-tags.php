@@ -624,3 +624,29 @@ function get_single_product_category_by_id($product_id) {
 	// Return false if no terms found
 	return false;
 }
+
+function my_custom_comment_form($fields) {
+	// Modify the author field
+	$fields['author'] = '<p class="comment-form-author">' .
+											'<input id="author" name="author" type="text" placeholder="Name*" size="30" maxlength="245" required="required" /></p>';
+	
+	// Modify the email field
+	$fields['email'] = '<p class="comment-form-email">' .
+										 '<input id="email" name="email" type="email" placeholder="Email*" size="30" maxlength="100" required="required" /></p>';
+	
+	// Modify the url field
+	$fields['url'] = '<p class="comment-form-url">' .
+									 '<input id="url" name="url" type="url" placeholder="Website" size="30" maxlength="200" /></p>';
+
+	return $fields;
+}
+
+function my_custom_comment_textarea($defaults) {
+	// Modify the comment field
+	$defaults['comment_field'] = '<p class="comment-form-comment">' .
+															 '<textarea id="comment" name="comment" placeholder="Type here..." cols="45" rows="8" maxlength="65525" required="required"></textarea></p>';
+	return $defaults;
+}
+
+add_filter('comment_form_default_fields', 'my_custom_comment_form');
+add_filter('comment_form_defaults', 'my_custom_comment_textarea');
