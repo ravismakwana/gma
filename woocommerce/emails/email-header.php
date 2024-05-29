@@ -46,7 +46,12 @@ if (!defined('ABSPATH')) {
                                                 </div>
                                             </td>
                                             <td id="header_wrapper">
-                                                <h1><?php echo $email_heading; ?></h1>
+                                                <p>
+													<a href="tel:+61731032369">Toll Free: +61 7 3103 2369</a>
+												</p>
+												<p>
+													<a href="https://wa.link/hvj3j6" target="_blank" class="whatsapp"><img src="<?php echo esc_url('https://www.genericmedsaustralia.com/wp-content/uploads/2023/05/whatsapp.png'); ?>" width="20" height="20" alt="whatsapp" /><span>+61 7 3103 2369 (Click to chat)</span></a>
+												</p>
                                             </td>
                                         </tr>
                                     </table>
@@ -64,10 +69,10 @@ if (!defined('ABSPATH')) {
                                                     <tr>
                                                         <td valign="top">
                                                             <h2 id="site_title">
-                                                                ArrowMeds.com <?php //echo $email_heading; ?>
+                                                            Genericmedsaustralia.com <?php //echo $email_heading; ?>
                                                                 <small>*** PLEASE PRINT RECEIPT OUT AND RETAIN IT FOR FUTURE REFERENCE ***</small>
                                                             </h2>
-                                                            <table width="100%" id="bg-cyan-top">
+                                                            <!-- <table width="100%" id="bg-cyan-top">
                                                                 <tbody>
                                                                     <tr>         
                                                                         <td>GUARANTEE</td>
@@ -75,7 +80,7 @@ if (!defined('ABSPATH')) {
                                                                         <td>CONTACT US</td>
                                                                     </tr>
                                                                 </tbody>
-                                                            </table>
+                                                            </table> -->
                                                             <div id="body_content_inner">
 
 

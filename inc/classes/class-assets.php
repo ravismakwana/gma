@@ -49,6 +49,10 @@ class Assets {
 		}
 		wp_enqueue_style( 'slick-css' );
 		wp_enqueue_style( 'slick-theme-css' );
+		
+		if(is_page(9989)) {
+			wp_enqueue_style( 'review-css' );
+		}
 
 	}
 

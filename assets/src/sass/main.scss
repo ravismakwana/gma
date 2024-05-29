@@ -469,7 +469,7 @@ body.admin-bar .offcanvas {
       p {
         padding-left: 15px;
       padding-right: 15px;
-      }
+      } 
     }
     .comment-form-comment,.comment-form-author,.comment-form-email,.comment-form-url {
       margin-bottom: 30px;
@@ -529,6 +529,25 @@ body.admin-bar .offcanvas {
     color: #415161;
     font-size: 14px;
   }
+}
+.wp-block-table {
+  overflow-x: auto;
+  margin-bottom: 0;
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    border-spacing: 0;
+    border-width: 1px 0 0 1px;
+    margin: 0 0 1.5em;
+    border: 1px solid #dddddd;
+    th,td {
+      border: 1px solid #dddddd;
+      padding: .5em;
+    }
+  }
+}
+#thankyou-popup .text-main {
+  max-width: 340px;
 }
 @media only screen and (min-width: 991px) {
   .border-lg-end {

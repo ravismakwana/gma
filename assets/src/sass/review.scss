@@ -241,3 +241,146 @@ ul.review_slider {
 		}
 	}
 }
+
+/* Site review CSS */
+.page-id-9989 .entry-header {
+	display: none;
+}
+.page-id-9989 .rating-section {
+    display: flex;
+    align-items: center;
+}
+.page-id-9989 .rating-section__rating-number .glsr-summary-rating span {
+    font-size: 50px;
+    font-weight: normal;
+}
+.page-id-9989 span.rating-section__rating-star-text {
+    line-height: normal;
+}
+.page-id-9989 .glsr-summary-stars .glsr-star {
+    background-size: 3.5rem !important;
+    height: 3.5rem !important;
+    width: 3.5rem !important;
+}
+.page-id-9989 .rating-section__rating-star-text .glsr-summary-text {
+    font-size: 14px;
+    color: #000;
+}
+.page-id-9989 .rating-section__rating-star-text .glsr-summary-text {
+    font-size: 16px;
+}
+.page-id-9989 .percentage-section {
+    width: 35%;
+    margin-left: 20px;
+}
+.page-id-9989 .percentage-section .glsr-summary-percentages {
+    font-size: 13px;
+}
+.page-id-9989 .percentage-section .glsr-bar-label {
+    line-height: 1.6;
+}
+.page-id-9989 .glsr-reviews {
+    display: flex !important;
+    padding: 30px 0;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+.page-id-9989 .glsr-review {
+    flex-basis: 48.50% !important;
+    box-shadow: 0px 7px 10px 0px #ccccca;
+    border: 0;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f2f2f2;
+    border-left: 4px solid #067e69;
+    text-align: left;
+}
+.page-id-9989 .glsr-review-title,.glsr-review-response-inner strong {
+	color: #415161;
+	h4 {
+		font-weight: 600 !important;
+	}
+}
+.page-id-9989 .glsr-review-author {
+    color: #067e69;
+    border-bottom: 1px solid rgba(0,0,0,.32);
+    width: 100%;
+    padding-bottom: 5px;
+}
+.page-id-9989 nav.navigation {
+    background: transparent;
+    height: 0;
+    width: 100%;
+    margin: auto;
+    z-index: 99;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.page-id-9989 .nav-links {
+    display: flex;
+    align-items: center;
+}
+.page-id-9989 .page-numbers {
+    margin: 0 5px;
+    padding: 10px;
+}
+.page-id-9989 a.prev.page-numbers, a.next.page-numbers {
+    background-color: rgba(0,0,0,.3);
+    color: #000;
+    border-radius: 5px;
+}
+.page-id-9989 a.next.page-numbers:before, a.prev.page-numbers:before {
+    top: 10% !important;
+    left: 40% !important;
+    font-size: 20px !important;
+}
+.page-id-9989 .glsr-default form.glsr-form label.glsr-label {
+    font-size: 14px;
+}
+.page-id-9989 .glsr-default form.glsr-form input.glsr-input, .glsr-default form.glsr-form textarea.glsr-textarea {
+    padding: 15px 10px !important;
+    font-size: 12px;
+}
+.page-id-9989 .glsr-default form.glsr-form [type=submit] {
+    color: #fff !important;
+    background-color: #067e69 !important;
+    padding: 12px !important;
+}
+.page-id-9989 .glsr-default .glsr-summary {
+	max-width: 100%;
+	justify-content: center;
+}
+.page-id-9989 header.col-12{
+	display: none;
+} 
+
+@media screen and (max-width: 1200px) {
+	.page-id-9989 .rating-section {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-basis: 100%;
+	}
+	.page-id-9989 .percentage-section {
+		width: 100%;
+		margin-left: 0;
+		display: flex;
+		justify-content: center;
+	}
+}
+@media screen and (max-width: 767px) {
+	.page-id-9989 .glsr-reviews {
+		flex-wrap: wrap;
+	}
+	.page-id-9989 .glsr-review {
+		flex-basis: 100% !important;
+	}
+	.page-id-9989 .rating-section__rating-star-text .glsr-summary-text {
+		font-size: 15px;
+	}
+	.page-id-9989 .rating-section__rating-number .glsr-summary-rating span {
+		font-size: 35px;
+	}
+	
+}
+/* Site review CSS End */

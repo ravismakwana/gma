@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
 <?php /* translators: %s: Customer first name */ ?>
-    <p><?php printf( __( 'Hi %s,', 'woocommerce' ), $order->get_billing_first_name() ); ?></p><?php // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped ?>
+    <p><?php printf( __( 'Dear %s,', 'woocommerce' ), $order->get_billing_first_name() ); ?></p><?php // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped ?>
     <p><?php _e( 'Thank you for shopping with us!', 'woocommerce' ); ?></p><?php // phpcs:ignore WordPress.XSS.EscapeOutput ?>
 
 <?php
@@ -50,36 +50,21 @@ do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, 
 do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email );
 
 ?>
-    <div id="email_app_button"
-         style="text-align: left; display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
-        <div>
-            <h6 style="text-align: left; margin-right: 10px; font-size: 16px; margin-top: 0; margin-bottom: 0;">
-				<?php _e( 'Download Apps', 'woocommerce' ); // phpcs:ignore WordPress.XSS.EscapeOutput ?>
-            </h6>
-        </div>
-        <div class="android_icon">
-            <a href="<?php echo home_url(), '/arrowmeds-app/'; ?>" target="_blank">
-                <img src="<?php echo home_url().'/wp-content/uploads/2023/06/android-app.png'; ?>" alt="Android App"
-                     width="120" height="60">
-            </a>
-        </div>
-
-    </div>
     <p style="text-align: left;">
 		<?php _e( 'Average normal shipping through EMS time is 15- 22 days, please (Delivery may be take up to 30 days from date of dispatch, due to if any disruption in postal services due to weather issue or natural disaster).', 'woocommerce' ); // phpcs:ignore WordPress.XSS.EscapeOutput ?>
     </p>
     <p style="text-align: left;">
-		<?php _e( 'You can send your prescription to <a href="mailto:admin@arrowmeds.com">admin@arrowmeds.com</a> also. (JPEG, PDF file supported)', 'woocommerce' ); // phpcs:ignore WordPress.XSS.EscapeOutput ?>
+		<?php _e( 'You can send your prescription to <a href="mailto:admin@genericmedsaustralia.com">admin@genericmedsaustralia.com</a> also. (JPEG, PDF file supported)', 'woocommerce' ); // phpcs:ignore WordPress.XSS.EscapeOutput ?>
     </p>
     <p style="text-align: left;">
-		<?php _e( 'This email has been sent to you, as a one-time mailing, as a result of an order being placed on the website <a href="' . get_home_url() . '" target="_blank">www.arrowmeds.com</a> and the person placing the order entering the email address. If you have any questions or concerns about this, please contact our Customer Care immediately.', 'woocommerce' ); // phpcs:ignore WordPress.XSS.EscapeOutput ?>
+		<?php _e( 'This email has been sent to you, as a one-time mailing, as a result of an order being placed on the website <a href="' . get_home_url() . '" target="_blank">www.genericmedsaustralia.com</a> and the person placing the order entering the email address. If you have any questions or concerns about this, please contact our Customer Care immediately.', 'woocommerce' ); // phpcs:ignore WordPress.XSS.EscapeOutput ?>
     </p>
     <p style="text-align: left;">
-		<?php _e( 'In case of any trouble please email us at <a href="mailto:support@arrowmeds.com">support@arrowmeds.com</a> or open support Ticket', 'woocommerce' ); // phpcs:ignore WordPress.XSS.EscapeOutput ?>
+		<?php _e( 'In case of any trouble please email us at <a href="mailto:admin@genericmedsaustralia.com">admin@genericmedsaustralia.com</a> or open support Ticket', 'woocommerce' ); // phpcs:ignore WordPress.XSS.EscapeOutput ?>
     </p>
     <p style="text-align: left;">
         Warm Regards,<br/>
-        Team ArrowMeds
+        Team Generic Meds Australia
     </p>
 <?php
 

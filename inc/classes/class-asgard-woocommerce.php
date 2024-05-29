@@ -901,7 +901,7 @@ $fragments['div.right_cart-subtotal-right'] .= '<div class="right_cart-subtotal-
                                     <div class="mb-4 text-center">
                                         <svg width="75" height="75" fill="var(--bs-primary)"><use href="#icon-circle-check"></use></svg>
                                     </div>
-                                    <div class="text-center">
+                                    <div class="text-center text-main">
                                         <h1>Thank You !</h1>
                                         <p>Your order has been received. We've send the link to your inbox.</p>
                                         <button class="btn btn-primary" data-bs-dismiss="modal">Close</button>

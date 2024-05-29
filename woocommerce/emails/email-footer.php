@@ -27,6 +27,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 												</table>
 												<!-- End Content -->
 											</td>
+											<td align="center" valign="top">
+												<!-- Footer Bottom -->
+												<table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_header">
+													<tr>
+														<td id="header_wrapper" class="footer-bottom" style="padding: 10px 48px; color: #fff;">
+															<table>
+																<tr>
+																	<td><a href="https://www.genericmedsaustralia.com/shipping/">Refund And Returns</a></td>
+																	<td><a href="https://www.genericmedsaustralia.com/shipping/">Cancellation Policy</a></td>
+																	<td><a href="https://www.genericmedsaustralia.com/shipping/">Terms And Conditions</a></td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+												<!-- End Footer Bottom -->
+											</td>
 										</tr>
 									</table>
 									<!-- End Body -->
