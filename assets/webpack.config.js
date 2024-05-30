@@ -21,6 +21,7 @@ const entry = {
     author: JS_DIR + '/author.js',
     home: JS_DIR + '/home.js',
     review: JS_DIR + '/review.js',
+    contact: JS_DIR + '/contact.js',
     product: JS_DIR + '/product.js',
 };
 const output = {

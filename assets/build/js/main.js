@@ -349,6 +349,7 @@ jQuery(document).ready(function ($) {
       }
     }]
   });
+  $('.is-layout-flex').removeClass('is-layout-flex');
 });
 }();
 /******/ })()

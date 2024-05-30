@@ -67,6 +67,9 @@ body {
 .woocommerce h2, .woocommerce-account h2 {
   font-size: 1.625rem;
 }
+.body-text {
+  color: #415161;
+}
 .single-post {
   .entry-image {
     display: none !important;
@@ -81,6 +84,22 @@ body {
     line-height: 1.4em;
     font-weight: 600;
     margin-bottom: .7em;
+  }
+}
+.tax-product_cat {
+  .woo-title {
+    font-size: 1rem;
+  }
+}
+.html-sitemap-column {
+  h2 {
+    font-weight: 600;
+  }
+  ul {
+    padding-left: 20px;
+    a {
+      text-decoration: none;
+    }
   }
 }
 .header-top-bar-main {
@@ -571,7 +590,7 @@ body.admin-bar .offcanvas {
 }
 @media only screen and (max-width: 767px) {
   .canvas-btn svg {
-    height: 30px;
+    height: 25px;
     width: 30px;
   }
   footer {

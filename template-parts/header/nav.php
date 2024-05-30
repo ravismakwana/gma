@@ -15,7 +15,7 @@ $header_menus = wp_get_nav_menu_items( $header_menu_id );
         <div class="mega-menu-title d-flex align-items-center position-relative">
             <!-- Offcanvas code is added on footer.php -->
             <a data-bs-toggle="offcanvas" href="#offcanvasGMA" role="button" aria-controls="offcanvasGMA"
-               class="canvas-btn">
+               class="canvas-btn bg-primary p-1 rounded-1 d-md-none d-block pb-2">
                 <svg width="30" height="30" fill="green">
                     <use href="#icon-bar"></use>
                 </svg>
@@ -81,7 +81,7 @@ $header_menus = wp_get_nav_menu_items( $header_menu_id );
 					}
 				}
 				?>
-                <li class="nav-item d-block d-sm-block d-md-none d-lg-none"><a
+                <li class="nav-item d-none d-sm-none d-md-none d-lg-none"><a
                             href="<?php echo get_permalink( wc_get_page_id( 'myaccount' ) ); ?>"
                             class="text-uppercase fs-14 nav-link px-lg-3 px-md-0 nav-link text-decoration-none">My account</a></li>
 				<?php

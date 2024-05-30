@@ -29,6 +29,7 @@ class Assets {
 		wp_register_style( 'main-css', ASGARD_BUILD_CSS_URI . '/main.css', [], filemtime( ASGARD_BUILD_CSS_DIR_PATH . '/main.css' ), 'all' );
 		wp_register_style( 'home-css', ASGARD_BUILD_CSS_URI . '/home.css', [], filemtime( ASGARD_BUILD_CSS_DIR_PATH . '/home.css' ), 'all' );
 		wp_register_style( 'review-css', ASGARD_BUILD_CSS_URI . '/review.css', [], filemtime( ASGARD_BUILD_CSS_DIR_PATH . '/review.css' ), 'all' );
+		wp_register_style( 'contact-css', ASGARD_BUILD_CSS_URI . '/contact.css', [], filemtime( ASGARD_BUILD_CSS_DIR_PATH . '/contact.css' ), 'all' );
 		wp_register_style( 'single-css', ASGARD_BUILD_CSS_URI . '/single.css', [], filemtime( ASGARD_BUILD_CSS_DIR_PATH . '/single.css' ), 'all' );
 		wp_register_style( 'product-css', ASGARD_BUILD_CSS_URI . '/product.css', [], filemtime( ASGARD_BUILD_CSS_DIR_PATH . '/product.css' ), 'all' );
 		wp_register_style( 'slick-css', ASGARD_BUILD_LIB_URI . '/css/slick/slick.css', [], false, 'all' );
@@ -53,7 +54,9 @@ class Assets {
 		if(is_page(9989)) {
 			wp_enqueue_style( 'review-css' );
 		}
-
+		if(is_page(15)) {
+			wp_enqueue_style( 'contact-css' );
+		}
 	}
 
 	public function register_scripts() {
@@ -150,7 +153,7 @@ class Assets {
 	public function dequeue_block_styles() {
 
 
-		if ( is_front_page()) {
+		if ( is_front_page() || is_page(15) ) {
 			// Remove CSS on the front end.
 			wp_dequeue_style( 'wp-block-library' );
 
